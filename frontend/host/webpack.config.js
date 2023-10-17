@@ -65,7 +65,7 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "react_17_microfrontend_template",
+      name: "host",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {},
