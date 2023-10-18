@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import jwtDecode from "jwt-decode";
 import { useState } from "react";
+import { useSendLogoutMutation } from "../../redux/features/auth/authApiSlice";
 
 const Header = () => {
     const [username, setUserName] = useState("");
@@ -19,6 +20,24 @@ const Header = () => {
             setUserName(decoded?.UserInfo?.username)
         }
     }, [token])
+
+    const [sendLogout, {
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+        reset
+    }] = useSendLogoutMutation()
+
+    useEffect(() => {
+        if (isSuccess) {
+            history.push('/auth/signin')
+            reset()
+        } else if (isError) {
+            alert(JSON.stringify(error.data?.message))
+            reset()
+        }
+    }, [isSuccess, history])
 
     return (
         <div className={styles.HeaderParent} >
@@ -35,8 +54,10 @@ const Header = () => {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={sendLogout}
+                            disabled={isLoading}
                         >
-                            Logout
+                            {isLoading ? "Logging Out..." : "Logout"}
                         </Button> : <Button
                             fullWidth
                             variant="contained"

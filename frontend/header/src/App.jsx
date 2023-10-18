@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import { useEffect } from "react";
 import { saveToken } from "./redux/features/auth/authSlice";
+import PersistLogin from "./components/PersistLogin";
 
 const App = ({ history, props }) => {
 
@@ -18,7 +19,9 @@ const App = ({ history, props }) => {
   return (
     <div>
       <Router history={history}>
-        <Header />
+        <PersistLogin>
+          <Header />
+        </PersistLogin>
       </Router>
     </div>
   )

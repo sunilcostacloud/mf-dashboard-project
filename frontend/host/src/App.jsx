@@ -70,7 +70,7 @@ const App = () => {
               </Route>
 
               <Route path="/">
-                <HomeLazy />
+                <HomeLazy token={token} />
               </Route>
 
             </Switch>

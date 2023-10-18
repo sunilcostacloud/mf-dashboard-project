@@ -1,14 +1,43 @@
 import { Switch, Route, Router } from 'react-router-dom';
 import Landing from './components/Landing';
 import Pricing from './components/Pricing';
+import { useEffect } from 'react';
+import { saveToken } from "./redux/features/auth/authSlice";
+import { useDispatch } from 'react-redux'
+import PersistLogin from './components/PersistLogin';
 
-const App = ({ history }) => {
+const App = ({ history, props }) => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(saveToken(props?.token))
+  }, [props, dispatch])
+
   return (
     <div>
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/pricing" component={Pricing} />
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <PersistLogin {...props} >
+                {/* <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}> */}
+                <Landing />
+                {/* </RequireAuth> */}
+              </PersistLogin>
+            )}
+          />
+          <Route
+            exact
+            path="/pricing"
+            render={(props) => (
+              <PersistLogin {...props} >
+                {/* <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}> */}
+                <Pricing />
+                {/* </RequireAuth> */}
+              </PersistLogin>
+            )}
+          />
           {/* <Route component={PageNotFound} /> */}
         </Switch>
       </Router>
