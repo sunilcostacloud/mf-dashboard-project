@@ -5,7 +5,6 @@ import Progress from './components/Progress';
 import { useSelector, useDispatch } from 'react-redux'
 import { saveToken } from './redux/features/tokenSlice';
 import UnAuthorized from './components/UnAuthorized';
-
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const HomeLazy = lazy(() => import('./components/HomeApp'));
 const HeaderLazy = lazy(() => import('./components/HeaderApp'));
@@ -76,16 +75,21 @@ const App = () => {
 
               {/* private routes */}
 
-              {/* <Route
-            path="/"
-            render={(props) => (
-              <PersistLogin {...props} >
-                <HomeLazy />
-              </PersistLogin>
-            )}
-          /> */}
-
               <Route path="/" component={HomeLazy} />
+
+              {/* <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <PersistLogin {...props} >
+                    <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}>
+                      <Home />
+                    </RequireAuth>
+                  </PersistLogin>
+                )}
+              /> */}
+
+
             </Switch>
           </div>
         </div>
