@@ -81,7 +81,7 @@ const App = () => {
               </Route>
 
               <Route path="/user">
-                <UserLazy />
+                <UserLazy token={token} />
               </Route>
 
               <Route path="/">

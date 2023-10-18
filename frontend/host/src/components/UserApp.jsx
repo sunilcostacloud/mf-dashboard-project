@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { mount } from 'user/UserApp';
 import { useHistory } from 'react-router-dom';
 
-const UserApp = () => {
+const UserApp = (props) => {
     const ref = useRef(null);
     const history = useHistory();
 
@@ -16,7 +16,7 @@ const UserApp = () => {
                     history.push(nextPathname);
                 }
             },
-        });
+        }, props);
 
         history.listen(onParentNavigate);
     }, []);

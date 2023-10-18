@@ -8,7 +8,7 @@ import { store } from "./redux/store.js";
 
 
 // Mount function to start up the app
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (el, { onNavigate, defaultHistory, initialPath }, props) => {
     const history =
         defaultHistory ||
         createMemoryHistory({
@@ -23,7 +23,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     ReactDOM.render(
         <React.StrictMode>
             <Provider store={store}>
-                <App history={history} />
+                <App history={history} props={props} />
             </Provider>
         </React.StrictMode>,
         el
