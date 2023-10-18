@@ -11,6 +11,7 @@ const HeaderLazy = lazy(() => import('./components/HeaderApp'));
 const SideMenuLazy = lazy(() => import('./components/SideMenuApp'));
 const AdminLazy = lazy(() => import('./components/AdminApp'));
 const CreatorLazy = lazy(() => import('./components/CreatorApp'));
+const UserLazy = lazy(() => import('./components/UserApp'));
 
 const App = () => {
   const dispatch = useDispatch()
@@ -81,6 +82,10 @@ const App = () => {
 
               <Route path="/">
                 <HomeLazy token={token} />
+              </Route>
+
+              <Route path="/user">
+                <UserLazy />
               </Route>
 
             </Switch>
