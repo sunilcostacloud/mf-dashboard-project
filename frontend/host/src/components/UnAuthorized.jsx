@@ -22,7 +22,7 @@ const UnAuthorized = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  onClick={() => history.goBack()}
+                  onClick={() => history.push("/")}
                 >
                   Go Back
                 </Button>

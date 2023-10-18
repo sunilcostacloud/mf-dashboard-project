@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import PersistLogin from './components/PersistLogin';
 import Users from './components/users/Users';
 import EditUser from './components/users/EditUser';
+import RequireAuth from './components/RequireAuth';
 
 const App = ({ history, props }) => {
   const dispatch = useDispatch()
@@ -20,9 +21,9 @@ const App = ({ history, props }) => {
             path="/admin"
             render={(props) => (
               <PersistLogin {...props} >
-                {/* <RequireAuth {...props} allowedRoles={['Admin']}> */}
-                <Users />
-                {/* </RequireAuth> */}
+                <RequireAuth {...props} allowedRoles={['Admin']}>
+                  <Users />
+                </RequireAuth>
               </PersistLogin>
             )}
           />
@@ -32,9 +33,9 @@ const App = ({ history, props }) => {
             path="/admin/:id"
             render={(props) => (
               <PersistLogin {...props} >
-                {/* <RequireAuth {...props} allowedRoles={['Admin']}> */}
-                <EditUser />
-                {/* </RequireAuth> */}
+                <RequireAuth {...props} allowedRoles={['Admin']}>
+                  <EditUser />
+                </RequireAuth>
               </PersistLogin>
             )}
           />
