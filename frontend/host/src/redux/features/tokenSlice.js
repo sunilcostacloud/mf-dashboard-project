@@ -7,9 +7,16 @@ export const tokenSlice = createSlice({
     saveToken: (state, action) => {
       state.token = action.payload;
     },
+    setCredentials: (state, action) => {
+      const { accessToken } = action.payload
+      state.token = accessToken
+    },
+    logOut: (state) => {
+      state.token = null
+    },
   },
 });
 
-export const { saveToken } = tokenSlice.actions;
+export const { saveToken, setCredentials, logOut } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
