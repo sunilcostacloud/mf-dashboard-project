@@ -73,6 +73,7 @@ module.exports = (_, argv) => ({
         header: "header@http://localhost:8081/remoteEntry.js",
         home: "home@http://localhost:8083/remoteEntry.js",
         admin: 'admin@http://localhost:8084/remoteEntry.js',
+        creator: 'creator@http://localhost:8085/remoteEntry.js',
       },
       exposes: {},
       shared: {

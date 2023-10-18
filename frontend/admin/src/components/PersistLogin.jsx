@@ -10,8 +10,6 @@ const PersistLogin = ({ children }) => {
 
     const { token } = useSelector(state => state.auth);
 
-    console.log("userToken", token)
-
     const [trueSuccess, setTrueSuccess] = useState(false);
 
     const [refresh, {
