@@ -12,7 +12,7 @@ const App = ({ history, props }) => {
 
 
   useEffect(() => {
-    dispatch(saveToken(props.token))
+    dispatch(saveToken(props?.token))
   }, [props, dispatch])
 
   return (
