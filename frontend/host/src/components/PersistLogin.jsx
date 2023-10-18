@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useRefreshMutation } from "../redux/features/authApiSlice";
 
+
 const PersistLogin = ({ children }) => {
 
     const { token } = useSelector(state => state.tokens);
@@ -37,7 +38,7 @@ const PersistLogin = ({ children }) => {
             <p className='errmsg'>
                 {`${error.data?.message} - `}
                 {/* <Link to="/signin">Please login again</Link>. */}
-                <Redirect to="/signin" />
+                <Redirect to="/auth/signin" />
             </p>
         );
     } else if (isSuccess && trueSuccess) {

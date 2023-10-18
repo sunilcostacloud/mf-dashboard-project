@@ -30,7 +30,7 @@ const menuItems = [
 ];
 
 const SideMenu = () => {
-  const { token } = useSelector(state => state.tokens);
+  const { token } = useSelector(state => state.auth);
 
   const [roles, setRoles] = useState([])
 

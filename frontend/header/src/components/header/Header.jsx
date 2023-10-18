@@ -11,7 +11,7 @@ const Header = () => {
 
     const history = useHistory();
 
-    const { token } = useSelector(state => state.tokens);
+    const { token } = useSelector(state => state.auth);
 
     useEffect(() => {
         if (token) {

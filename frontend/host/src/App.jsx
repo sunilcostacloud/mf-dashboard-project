@@ -3,8 +3,8 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Progress from './components/Progress';
 import { useSelector, useDispatch } from 'react-redux'
-import { saveToken } from './redux/features/tokenSlice';
 import UnAuthorized from './components/UnAuthorized';
+import { saveToken } from './redux/features/auth/authSlice';
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const HomeLazy = lazy(() => import('./components/HomeApp'));
 const HeaderLazy = lazy(() => import('./components/HeaderApp'));
@@ -13,7 +13,7 @@ const SideMenuLazy = lazy(() => import('./components/SideMenuApp'));
 const App = () => {
   const dispatch = useDispatch()
 
-  const { token } = useSelector(state => state.tokens);
+  const { token } = useSelector(state => state.auth);
 
   const { pathname } = useLocation();
 
@@ -41,8 +41,7 @@ const App = () => {
     };
   }, []);
 
-
-  //  console.log("checkToken", token)
+  // console.log("checkToken", token)
 
 
   return (
@@ -61,34 +60,18 @@ const App = () => {
           )}
           <div style={{ width: "100%" }} >
             <Switch>
+
+              <Route exact path="/unauthorized">
+                <UnAuthorized />
+              </Route>
+
               <Route path="/auth">
                 <AuthLazy />
               </Route>
 
-              <Route
-                exact
-                path="/unauthorized"
-                render={(props) => (
-                  <UnAuthorized />
-                )}
-              />
-
-              {/* private routes */}
-
-              <Route path="/" component={HomeLazy} />
-
-              {/* <Route
-                exact
-                path="/"
-                render={(props) => (
-                  <PersistLogin {...props} >
-                    <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}>
-                      <Home />
-                    </RequireAuth>
-                  </PersistLogin>
-                )}
-              /> */}
-
+              <Route path="/">
+                <HomeLazy />
+              </Route>
 
             </Switch>
           </div>
