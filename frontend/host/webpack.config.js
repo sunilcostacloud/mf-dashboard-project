@@ -76,7 +76,9 @@ module.exports = (_, argv) => ({
         creator: 'creator@http://localhost:8085/remoteEntry.js',
         user: 'user@http://localhost:8086/remoteEntry.js',
       },
-      exposes: {},
+      exposes: {
+        './PageNotFound': './src/components/PageNotFound'
+      },
       shared: {
         ...deps,
         react: {
