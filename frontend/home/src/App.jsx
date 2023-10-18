@@ -40,7 +40,7 @@ const App = ({ history, props }) => {
               </PersistLogin>
             )}
           />
-          <Route component={PageNotFound} />
+          {/* <Route component={PageNotFound} /> */}
         </Switch>
       </Router>
     </div>

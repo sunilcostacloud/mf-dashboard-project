@@ -87,9 +87,6 @@ const App = () => {
               <Route path="/">
                 <HomeLazy token={token} />
               </Route>
-
-
-
             </Switch>
           </div>
         </div>
