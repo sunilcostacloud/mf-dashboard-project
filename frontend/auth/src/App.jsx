@@ -4,6 +4,7 @@ import SignUp from './pages/SignUp';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken } from './redux/features/auth/authSlice';
 import { useEffect } from 'react';
+import PageNotFound from 'page_not_found/PageNotFound';
 
 const App = ({ history }) => {
   const token = useSelector(selectCurrentToken);
@@ -26,7 +27,7 @@ const App = ({ history }) => {
         <Switch>
           <Route exact path="/auth/signin" component={SignIn} />
           <Route exact path="/auth/signup" component={SignUp} />
-          {/* <Route component={PageNotFound} /> */}
+          <Route component={PageNotFound} />
         </Switch>
       </Router>
     </div>

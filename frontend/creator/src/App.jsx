@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import PersistLogin from './components/PersistLogin';
 import Dashboard from './components/music/Dashboard';
 import RequireAuth from './components/RequireAuth';
+import PageNotFound from 'page_not_found/PageNotFound';
 
 const App = ({ history, props }) => {
   const dispatch = useDispatch()
@@ -26,7 +27,7 @@ const App = ({ history, props }) => {
               </PersistLogin>
             )}
           />
-          {/* <Route component={PageNotFound} /> */}
+          <Route component={PageNotFound} />
         </Switch>
       </Router>
     </div>
