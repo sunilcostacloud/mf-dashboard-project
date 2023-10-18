@@ -35,10 +35,9 @@ const PersistLogin = ({ children }) => {
     if (isLoading) {
         return <p>Loading...</p>;
     } else if (isError) {
-        { alert(`${error.data?.message} - `) }
         return (
-            <p className='errmsg'>
-
+            <p>
+                {`${error.data?.message} - `}
                 {/* <Link to="/signin">Please login again</Link>. */}
                 <Redirect to="/auth/signin" />
             </p>
