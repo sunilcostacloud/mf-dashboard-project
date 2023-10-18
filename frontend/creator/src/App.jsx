@@ -4,6 +4,7 @@ import { saveToken } from "./redux/features/auth/authSlice";
 import { useDispatch } from 'react-redux'
 import PersistLogin from './components/PersistLogin';
 import Dashboard from './components/music/Dashboard';
+import RequireAuth from './components/RequireAuth';
 
 const App = ({ history, props }) => {
   const dispatch = useDispatch()
@@ -19,9 +20,9 @@ const App = ({ history, props }) => {
             path="/creator"
             render={(props) => (
               <PersistLogin {...props} >
-                {/* <RequireAuth {...props} allowedRoles={['Admin', 'Creator']}> */}
-                <Dashboard />
-                {/* </RequireAuth> */}
+                <RequireAuth {...props} allowedRoles={['Admin', 'Creator']}>
+                  <Dashboard />
+                </RequireAuth>
               </PersistLogin>
             )}
           />
