@@ -47,8 +47,6 @@ const SideMenu = () => {
     }
   }, [token])
 
-  console.log("rolleeesss", roles)
-
   useEffect(() => {
     // Find the index of the menu item with a matching "to" value
     const foundIndex = menuItems.findIndex((menuItem) => menuItem.to === pathname);

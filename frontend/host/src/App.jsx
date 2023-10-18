@@ -7,8 +7,8 @@ import { saveToken } from './redux/features/tokenSlice';
 import UnAuthorized from './components/UnAuthorized';
 
 const AuthLazy = lazy(() => import('./components/AuthApp'));
-// const HomeLazy = lazy(() => import('./components/HomeApp'));
-// const HeaderLazy = lazy(() => import('./components/HeaderApp'));
+const HomeLazy = lazy(() => import('./components/HomeApp'));
+const HeaderLazy = lazy(() => import('./components/HeaderApp'));
 const SideMenuLazy = lazy(() => import('./components/SideMenuApp'));
 
 const App = () => {
@@ -43,17 +43,17 @@ const App = () => {
   }, []);
 
 
-  console.log("checkToken", token)
+  //  console.log("checkToken", token)
 
 
   return (
     <>
       <Suspense fallback={<Progress />}>
-        {/* {show === true && (
+        {show === true && (
           <div>
-            <HeaderLazy />
+            <HeaderLazy token={token} />
           </div>
-        )} */}
+        )}
         <div style={{ display: show ? "flex" : "block" }}>
           {show === true && (
             <div>
@@ -85,7 +85,7 @@ const App = () => {
             )}
           /> */}
 
-              {/* <Route path="/" component={HomeLazy} /> */}
+              <Route path="/" component={HomeLazy} />
             </Switch>
           </div>
         </div>

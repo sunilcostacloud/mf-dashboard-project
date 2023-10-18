@@ -20,11 +20,11 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     }
 
     ReactDOM.render(
-        <Provider store={store}>
-            <React.StrictMode>
+        <React.StrictMode>
+            <Provider store={store}>
                 <App history={history} />
-            </React.StrictMode>
-        </Provider>,
+            </Provider>
+        </React.StrictMode>,
         el
     );
 

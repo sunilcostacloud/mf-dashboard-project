@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { mount } from 'header/HeaderApp';
 import { useHistory } from 'react-router-dom';
 
-const HeaderApp = () => {
+const HeaderApp = (props) => {
     const ref = useRef(null);
     const history = useHistory();
 
@@ -16,7 +16,7 @@ const HeaderApp = () => {
                     history.push(nextPathname);
                 }
             },
-        });
+        }, props);
 
         history.listen(onParentNavigate);
     }, []);

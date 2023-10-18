@@ -70,6 +70,8 @@ module.exports = (_, argv) => ({
       remotes: {
         auth: "auth@http://localhost:8087/remoteEntry.js",
         sidemenu: "sidemenu@http://localhost:8082/remoteEntry.js",
+        header: "header@http://localhost:8081/remoteEntry.js",
+        home: "home@http://localhost:8083/remoteEntry.js",
       },
       exposes: {},
       shared: {
