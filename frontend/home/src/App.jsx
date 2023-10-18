@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { saveToken } from "./redux/features/auth/authSlice";
 import { useDispatch } from 'react-redux'
 import PersistLogin from './components/PersistLogin';
+import RequireAuth from './components/RequireAuth';
 
 const App = ({ history, props }) => {
   const dispatch = useDispatch()
@@ -21,9 +22,9 @@ const App = ({ history, props }) => {
             path="/"
             render={(props) => (
               <PersistLogin {...props} >
-                {/* <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}> */}
-                <Landing />
-                {/* </RequireAuth> */}
+                <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}>
+                  <Landing />
+                </RequireAuth>
               </PersistLogin>
             )}
           />
@@ -32,9 +33,9 @@ const App = ({ history, props }) => {
             path="/pricing"
             render={(props) => (
               <PersistLogin {...props} >
-                {/* <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}> */}
-                <Pricing />
-                {/* </RequireAuth> */}
+                <RequireAuth {...props} allowedRoles={['User', 'Creator', 'Admin']}>
+                  <Pricing />
+                </RequireAuth>
               </PersistLogin>
             )}
           />
