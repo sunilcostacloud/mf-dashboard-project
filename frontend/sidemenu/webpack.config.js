@@ -68,7 +68,9 @@ module.exports = (_, argv) => ({
       name: "sidemenu",
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: {
+        "./SideMenuApp": "./src/bootstrap"
+      },
       shared: {
         ...deps,
         react: {
