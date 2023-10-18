@@ -80,13 +80,15 @@ const App = () => {
                 <CreatorLazy token={token} />
               </Route>
 
+              <Route path="/user">
+                <UserLazy />
+              </Route>
+
               <Route path="/">
                 <HomeLazy token={token} />
               </Route>
 
-              <Route path="/user">
-                <UserLazy />
-              </Route>
+
 
             </Switch>
           </div>
