@@ -72,6 +72,7 @@ module.exports = (_, argv) => ({
         sidemenu: "sidemenu@http://localhost:8082/remoteEntry.js",
         header: "header@http://localhost:8081/remoteEntry.js",
         home: "home@http://localhost:8083/remoteEntry.js",
+        admin: 'admin@http://localhost:8084/remoteEntry.js',
       },
       exposes: {},
       shared: {
