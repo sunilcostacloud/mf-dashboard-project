@@ -1,18 +1,40 @@
 const Music = require("../models/musicModel");
-const fs = require("fs").promises;
-const path = require("path");
+const cloudinary = require('cloudinary').v2;
+
+async function uploadMusicFileToCloudinary(fileBuffer, filename) {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+            {
+                folder: 'music_files', // Set the folder in Cloudinary
+                resource_type: 'auto', // Automatically detect the file type
+            },
+            (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            }
+        ).end(fileBuffer);
+    });
+}
 
 exports.createMusic = async (req, res, next) => {
     try {
         const { name, genre, singer, movie } = req.body;
 
+        const result = await uploadMusicFileToCloudinary(req.file.buffer, req.file.originalname);
+
+        // console.log("result", result)
+
         const music = await Music.create({
             name,
             genre,
-            file: req.file.filename,
+            file: result.secure_url,
             singer,
             movie,
             user: req.userId,
+            cloudinaryPublicId: result.public_id, // Save the public_id
         });
 
         res.status(201).json({
@@ -113,14 +135,13 @@ exports.editMusic = async (req, res, next) => {
 
         // Update music file if provided
         if (req.file) {
-            // Delete the old music file
-            // await fs.unlink(
-            //     path.join(__dirname, "../uploads/musicFiles", music.file)
-            // );
-            await fs.unlink(path.join(__dirname, "../uploads", music.file));
+            // Delete the old file from Cloudinary using the public_id
+            cloudinary.uploader.destroy(music.cloudinaryPublicId);
 
-            // Update the music file with the new uploaded file
-            music.file = req.file.filename;
+            const result = await uploadMusicFileToCloudinary(req.file.buffer, req.file.originalname);
+
+            music.file = result.secure_url;
+            music.cloudinaryPublicId = result.public_id; // Update the public_id
         }
 
         await music.save();
@@ -149,8 +170,9 @@ exports.deleteMusic = async (req, res, next) => {
                 .json({ message: "Music record not found or unauthorized" });
         }
 
-        // Delete associated music file
-        await fs.unlink(path.join(__dirname, "../uploads", music.file));
+
+        // Delete the file from Cloudinary using the public_id
+        cloudinary.uploader.destroy(music.cloudinaryPublicId);
 
         // Delete the music record from the database
         await Music.findByIdAndDelete(musicId);

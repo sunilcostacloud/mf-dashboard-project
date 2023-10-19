@@ -276,7 +276,7 @@ const Dashboard = () => {
                                                     <TableCell align="center">
                                                         <audio controls>
                                                             <source
-                                                                src={`http://localhost:3500/uploads/${row.file}`}
+                                                                src={row.file}
                                                                 type="audio/mp3"
                                                             />
                                                             Your browser does not support the audio element.

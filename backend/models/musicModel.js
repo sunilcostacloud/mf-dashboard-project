@@ -30,6 +30,10 @@ const musicSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
+    cloudinaryPublicId: { // Add this field to store the public_id from Cloudinary
+        type: String,
+        required: false, // Not required since it will be empty for new records
+    },
 });
 
 module.exports = mongoose.model("Music", musicSchema);

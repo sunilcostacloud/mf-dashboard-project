@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { uploadMusic } = require("../multer");
+const multer = require("multer");
 const {
     createMusic,
     getMusicByUser,
@@ -11,6 +11,10 @@ const {
 const verifyJWT = require('../middleware/verifyJWT')
 
 router.use(verifyJWT)
+
+// Configure Multer for file upload using memory storage
+const storage = multer.memoryStorage();
+const uploadMusic = multer({ storage: storage });
 
 // Route for uploading music with authentication middleware
 router.post(
