@@ -136,7 +136,10 @@ exports.editMusic = async (req, res, next) => {
         // Update music file if provided
         if (req.file) {
             // Delete the old file from Cloudinary using the public_id
-            cloudinary.uploader.destroy(music.cloudinaryPublicId);
+            await cloudinary.api.delete_resources([music.cloudinaryPublicId], {
+                type: 'upload',
+                resource_type: 'video'
+            });
 
             const result = await uploadMusicFileToCloudinary(req.file.buffer, req.file.originalname);
 
@@ -169,10 +172,11 @@ exports.deleteMusic = async (req, res, next) => {
                 .status(404)
                 .json({ message: "Music record not found or unauthorized" });
         }
-
-
         // Delete the file from Cloudinary using the public_id
-        cloudinary.uploader.destroy(music.cloudinaryPublicId);
+        await cloudinary.api.delete_resources([music.cloudinaryPublicId], {
+            type: 'upload',
+            resource_type: 'video'
+        });
 
         // Delete the music record from the database
         await Music.findByIdAndDelete(musicId);
