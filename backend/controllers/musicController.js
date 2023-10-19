@@ -1,7 +1,7 @@
 const Music = require("../models/musicModel");
 const cloudinary = require('cloudinary').v2;
 
-async function uploadMusicFileToCloudinary(fileBuffer, filename) {
+async function uploadMusicFileToCloudinary(fileBuffer) {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
             {
@@ -23,7 +23,7 @@ exports.createMusic = async (req, res, next) => {
     try {
         const { name, genre, singer, movie } = req.body;
 
-        const result = await uploadMusicFileToCloudinary(req.file.buffer, req.file.originalname);
+        const result = await uploadMusicFileToCloudinary(req.file.buffer);
 
         // console.log("result", result)
 
@@ -141,7 +141,7 @@ exports.editMusic = async (req, res, next) => {
                 resource_type: 'video'
             });
 
-            const result = await uploadMusicFileToCloudinary(req.file.buffer, req.file.originalname);
+            const result = await uploadMusicFileToCloudinary(req.file.buffer);
 
             music.file = result.secure_url;
             music.cloudinaryPublicId = result.public_id; // Update the public_id
