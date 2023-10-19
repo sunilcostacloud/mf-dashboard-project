@@ -1,7 +1,6 @@
 const Music = require("../models/musicModel");
 const User = require('../models/User')
-const fs = require('fs').promises;
-const path = require('path');
+const cloudinary = require('cloudinary').v2;
 
 const getAllUsers = async (req, res) => {
     // Get all users from MongoDB, selecting email, username, and roles
@@ -74,8 +73,11 @@ const deleteUser = async (req, res) => {
 
         // Delete the associated music files
         for (const musicRecord of musicRecords) {
-            const musicFilePath = path.join(__dirname, '../uploads', musicRecord.file);
-            await fs.unlink(musicFilePath);
+            // Delete the file from Cloudinary using the public_id
+            await cloudinary.api.delete_resources([musicRecord.cloudinaryPublicId], {
+                type: 'upload',
+                resource_type: 'video'
+            });
         }
         // code to delete music inside upload folder ebd //
 
