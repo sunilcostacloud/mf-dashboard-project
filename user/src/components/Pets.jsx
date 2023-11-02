@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useFetchBreedsQuery } from "../redux/features/petsSlice";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 
@@ -31,11 +33,9 @@ const Pets = () => {
 
       {
         isFetching ? (
-          <div
-            style={{ width: "100%", display: "flex", justifyContent: "center" }}
-          >
-            Loading...
-          </div>
+          <Box sx={{ width: '100%', marginTop: "40px" }}>
+            <LinearProgress />
+          </Box>
         ) : isError ? (
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}

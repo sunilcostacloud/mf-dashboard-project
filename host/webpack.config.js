@@ -4,7 +4,10 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:8080/",
+    publicPath:
+      argv.mode === "development"
+        ? "http://localhost:8080/"
+        : "http://host-microfrontend.apps.ocp4.pacosta.com/",
   },
 
   resolve: {
@@ -68,13 +71,40 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        auth: "auth@http://localhost:8087/remoteEntry.js",
-        sidemenu: "sidemenu@http://localhost:8082/remoteEntry.js",
-        header: "header@http://localhost:8081/remoteEntry.js",
-        home: "home@http://localhost:8083/remoteEntry.js",
-        admin: 'admin@http://localhost:8084/remoteEntry.js',
-        creator: 'creator@http://localhost:8085/remoteEntry.js',
-        user: 'user@http://localhost:8086/remoteEntry.js',
+        auth:
+          argv.mode === "development"
+            ? "auth@http://localhost:8087/remoteEntry.js"
+            : "auth@http://auth-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js",
+
+        sidemenu:
+          argv.mode === "development"
+            ? "sidemenu@http://localhost:8082/remoteEntry.js"
+            : "sidemenu@http://sidemenu-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js",
+
+        header:
+          argv.mode === "development"
+            ? "header@http://localhost:8081/remoteEntry.js"
+            : "header@http://header-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js",
+
+        home:
+          argv.mode === "development"
+            ? "home@http://localhost:8083/remoteEntry.js"
+            : "home@http://home-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js",
+
+        admin:
+          argv.mode === "development"
+            ? 'admin@http://localhost:8084/remoteEntry.js'
+            : 'admin@http://admin-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js',
+
+        creator:
+          argv.mode === "development"
+            ? 'creator@http://localhost:8085/remoteEntry.js'
+            : 'creator@http://creator-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js',
+
+        user:
+          argv.mode === "development"
+            ? 'user@http://localhost:8086/remoteEntry.js'
+            : 'user@http://user-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js',
       },
       exposes: {
         './PageNotFound': './src/components/PageNotFound'

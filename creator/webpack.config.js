@@ -4,7 +4,10 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:8085/",
+    publicPath:
+      argv.mode === "development"
+        ? "http://localhost:8085/"
+        : "http://creator-microfrontend.apps.ocp4.pacosta.com/",
   },
 
   resolve: {
@@ -68,7 +71,10 @@ module.exports = (_, argv) => ({
       name: "creator",
       filename: "remoteEntry.js",
       remotes: {
-        page_not_found: "host@http://localhost:8080/remoteEntry.js"
+        page_not_found:
+          argv.mode === "development"
+            ? "host@http://localhost:8080/remoteEntry.js"
+            : "host@http://host-microfrontend.apps.ocp4.pacosta.com/remoteEntry.js"
       },
       exposes: {
         './CreatorApp': './src/bootstrap'

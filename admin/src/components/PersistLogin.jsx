@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useRefreshMutation } from "../redux/features/auth/authApiSlice";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 
@@ -33,7 +35,9 @@ const PersistLogin = ({ children }) => {
     }, []);
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <Box sx={{ width: '100%', marginTop: "40px" }}>
+            <LinearProgress />
+        </Box>;
     } else if (isError) {
         return (
             <p className='errmsg'>
